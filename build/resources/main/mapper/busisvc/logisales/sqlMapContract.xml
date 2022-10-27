@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.seoulit.logistics.busisvc.logisales.mapper.ContractMapper">
+<mapper namespace="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.mapper.ContractMapper">
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.to.EstimateTO" id="estimateList">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.EstimateTO" id="estimateList">
 		<result property="contractStatus" column="CONTRACT_STATUS"  />
 		<result property="customerCode" column="CUSTOMER_CODE"  />
 		<result property="description" column="DESCRIPTION"  />
@@ -27,7 +27,7 @@
 		]]>
 	</select>
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.to.ContractInfoTO" id="contractInfoResult">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ContractInfoTO" id="contractInfoResult">
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="estimateNo" column="ESTIMATE_NO"  />
 		<result property="contractType" column="CONTRACT_TYPE"  />
@@ -128,7 +128,7 @@
 		SELECT CONTRACT_SEQ.NEXTVAL FROM DUAL
 	</select>
 
-	<insert id="insertContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.to.ContractTO">
+	<insert id="insertContract" parameterType="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ContractTO">
 		INSERT INTO CONTRACT (CONTRACT_NO, ESTIMATE_NO,
 							  CONTRACT_TYPE, CUSTOMER_CODE, CONTRACT_DATE,
 							  CONTRACT_REQUESTER, PERSON_CODE_IN_CHARGE, DESCRIPTION)
@@ -138,7 +138,7 @@
 				#{personCodeInCharge}, #{description})
 	</insert>
 
-	<update id="updateContract" parameterType="kr.co.seoulit.logistics.busisvc.logisales.to.ContractTO">
+	<update id="updateContract" parameterType="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ContractTO">
 		UPDATE CONTRACT SET ESTIMATE_NO = #{estimateNo} ,
 							CONTRACT_TYPE = #{contractType} ,
 							CUSTOMER_CODE = #{customerCode} ,
@@ -149,7 +149,7 @@
 		WHERE CONTRACT_NO = #{contractNo}
 	</update>
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailTO" id="contractDetailResult">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ContractDetailTO" id="contractDetailResult">
 		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"  />
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="itemCode" column="ITEM_CODE"  />
@@ -180,7 +180,7 @@
 		<parameter property="RESULT" javaType="java.sql.ResultSet" jdbcType="CURSOR" mode="OUT" resultMap="contractDetailResult"/>
 	</parameterMap>
 
-	<resultMap id="insertContractDetailResult" type="kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailTO">
+	<resultMap id="insertContractDetailResult" type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ContractDetailTO">
 		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"/>
 	</resultMap>
 
@@ -202,7 +202,7 @@
 		SELECT * FROM CONTRACT_DETAIL WHERE CONTRACT_NO = #{contractNo}
 	</select>
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailInMpsAvailableTO" id="contractDetailInMpsAvailableResult">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ContractDetailInMpsAvailableTO" id="contractDetailInMpsAvailableResult">
 		<result property="contractNo" column="CONTRACT_NO"  />
 		<result property="contractType" column="CONTRACT_TYPE"  />
 		<result property="contractDate" column="CONTRACT_DATE"  />
@@ -248,7 +248,7 @@
 		UPDATE CONTRACT_DETAIL SET PROCESSING_STATUS = #{mpsStatus} WHERE CONTRACT_DETAIL_NO = #{contractDetailNo}
 	</update>
 
-	<delete id="deleteContractDetail" parameterType="kr.co.seoulit.logistics.busisvc.logisales.to.ContractDetailTO">
+	<delete id="deleteContractDetail" parameterType="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ContractDetailTO">
 		DELETE FROM CONTRACT_DETAIL WHERE CONTRACT_DETAIL_NO = #{contractDetailNo}
 	</delete>
 
@@ -279,7 +279,7 @@
 		</if>
 	</select>
 
-	<resultMap type="kr.co.seoulit.logistics.busisvc.logisales.to.ProcessPlanTO" id="planResult">
+	<resultMap type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.ProcessPlanTO" id="planResult">
 		<result property="contractDetailNo" column="CONTRACT_DETAIL_NO"  />
 	</resultMap>
 

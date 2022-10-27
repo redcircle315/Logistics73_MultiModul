@@ -50,6 +50,7 @@ public class LogisalesServiceImpl implements LogisalesService {
 		return estimateDetailTOList;
 	}
 
+
 	@Override
 	public ModelMap addNewEstimate(String estimateDate, EstimateTO newEstimateTO) {
 
@@ -60,15 +61,21 @@ public class LogisalesServiceImpl implements LogisalesService {
 		newEstimateTO.setEstimateNo(newEstimateNo);
 
 		estimateMapper.insertEstimate(newEstimateTO);
-			
+
 		ArrayList<EstimateDetailTO> estimateDetailTOList = newEstimateTO.getEstimateDetailTOList(); //bean객체
-			
+
+		int i = 1;
 		for (EstimateDetailTO bean : estimateDetailTOList) {
-			String newEstimateDetailNo = getNewEstimateDetailNo(newEstimateNo);
-				
+			StringBuilder newEstimateDetailNo = new StringBuilder();
+			newEstimateDetailNo.append("ES");
+			newEstimateDetailNo.append(newEstimateNo);
+			newEstimateDetailNo.append("-");
+			newEstimateDetailNo.append(String.format("%02d", i++));
+
+
 			bean.setEstimateNo(newEstimateNo);
-				
-			bean.setEstimateDetailNo(newEstimateDetailNo);
+
+			bean.setEstimateDetailNo(newEstimateDetailNo.toString());
 		}
 
 		resultMap = batchEstimateDetailListProcess(estimateDetailTOList,newEstimateNo);
@@ -77,6 +84,7 @@ public class LogisalesServiceImpl implements LogisalesService {
 
 		return resultMap;
 	}
+
 
 	public String getNewEstimateNo(String estimateDate) {
 

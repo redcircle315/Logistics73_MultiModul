@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.seoulit.logistics.busisvc.logisales.mapper.EstimateMapper">
+<mapper namespace="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.mapper.EstimateMapper">
 
-	<resultMap id="estimateResult" type="kr.co.seoulit.logistics.busisvc.logisales.to.EstimateTO">
+	<resultMap id="estimateResult" type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.EstimateTO">
 		<result property="customerCode" column="CUSTOMER_CODE" />
 		<result property="estimateDate" column="ESTIMATE_DATE" />
 		<result property="contractStatus" column="CONTRACT_STATUS" />
@@ -12,7 +12,7 @@
 		<result property="personCodeInCharge" column="PERSON_CODE_IN_CHARGE" />
 		<result property="description" column="DESCRIPTION" />
 		<result property="estimateNo" column="ESTIMATE_NO" />
- 		<collection property="estimateDetailTOList" resultMap="kr.co.seoulit.logistics.busisvc.logisales.mapper.EstimateMapper.estimateDetailResult"
+ 		<collection property="estimateDetailTOList" resultMap="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.mapper.EstimateMapper.estimateDetailResult"
 				javaType="java.util.ArrayList" />
 	</resultMap>
 
@@ -39,7 +39,7 @@
 		SELECT ESTIMATE_SEQ.NEXTVAL FROM DUAL
 	</select>
 
-	<insert id="insertEstimate" parameterType="kr.co.seoulit.logistics.busisvc.logisales.to.EstimateTO">
+	<insert id="insertEstimate" parameterType="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.EstimateTO">
 		INSERT INTO ESTIMATE
 							( ESTIMATE_NO,
 							  CUSTOMER_CODE, 
@@ -61,7 +61,7 @@
 						   )
 	</insert>
 
-	<update id="updateEstimate" parameterType="kr.co.seoulit.logistics.busisvc.logisales.to.EstimateTO">
+	<update id="updateEstimate" parameterType="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.EstimateTO">
 		UPDATE ESTIMATE SET
 						CUSTOMER_CODE = #{customerCode} ,
 						ESTIMATE_DATE = #{estimateDate} ,
@@ -82,7 +82,7 @@
 		WHERE ESTIMATE_NO = #{estimateNo}
 	</update>
 	
-	<resultMap id="estimateDetailResult" type="kr.co.seoulit.logistics.busisvc.logisales.to.EstimateDetailTO">
+	<resultMap id="estimateDetailResult" type="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.EstimateDetailTO">
 		<result property="description" column="DESCRIPTION" />
 		<result property="dueDateOfEstimate" column="DUE_DATE_OF_ESTIMATE" />
 		<result property="estimateAmount" column="ESTIMATE_AMOUNT" />
@@ -112,7 +112,7 @@
 		SELECT EST_DETAIL_SEQ.NEXTVAL FROM DUAL
 	</select>
 
-	<insert id="insertEstimateDetail" parameterType="kr.co.seoulit.logistics.busisvc.logisales.to.EstimateDetailTO">
+	<insert id="insertEstimateDetail" parameterType="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.EstimateDetailTO">
 		INSERT INTO ESTIMATE_DETAIL ( ESTIMATE_DETAIL_NO,
 									  ESTIMATE_NO, ITEM_CODE,
 									  ITEM_NAME,
@@ -136,7 +136,7 @@
 									 )
 	</insert>
 
-	<update id="updateEstimateDetail" parameterType="kr.co.seoulit.logistics.busisvc.logisales.to.EstimateDetailTO">
+	<update id="updateEstimateDetail" parameterType="kr.co.seoulit.logistics.busisvc.sales.controller.logisales.to.EstimateDetailTO">
 		UPDATE ESTIMATE_DETAIL SET ITEM_CODE = #{itemCode} , 
 								   ITEM_NAME = #{itemName} ,
 								   UNIT_OF_ESTIMATE = #{unitOfEstimate} , 

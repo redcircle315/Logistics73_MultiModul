@@ -575,16 +575,23 @@
   $("#amountModal").on('shown.bs.modal', function () {  // 실행하고자 하는 jQuery 코드
      $('#estimateAmountBox').focus(); //포커스를 얻었을 때 어떤 행위하기=> 견적수량 칸을 더블클릭해서 모달창이 띄워졌으면 바로 견적수량에 포커스가 위치하게 된다.
   })
-  
-  document.querySelector("#amountSave").addEventListener("click", () => {  //modal창 밑에 있는 Save에 걸리는 이벤트
-    if (itemRowNode == undefined) {   return;}
-    estDetailGridOptions.api.stopEditing();
-    itemRowNode.setDataValue("estimateAmount", $('#estimateAmountBox').val());
-    itemRowNode.setDataValue("unitPriceOfEstimate", $('#unitPriceOfEstimateBox').val());
-    itemRowNode.setDataValue("sumPriceOfEstimate", $('#sumPriceOfEstimateBox').val());
-    let newData = itemRowNode.data; // 바로 위에서 받아온 견적수량,견적단가,합계액의 데이터들이 newData라는 변수명에 담긴다.
-    itemRowNode.setData(newData);  // 그러면 itemRowNode에 set해준다.  그 다음 일괄저장으로 출발
-  })
+
+     document.querySelector("#amountSave").addEventListener("click", () => { //modal창 밑에 있는 Save에 걸리는 이벤트
+         if($('#estimateAmountBox').val()==0){
+             Swal.fire({
+                 text: "수량을 입력하지 않았습니다.",
+                 icon: "info",
+             })
+             itemRowNode.setDataValue("estimateAmount", $('#estimateAmountBox').val(""))
+             itemRowNode.setDataValue("sumPriceOfEstimate", $('#sumPriceOfEstimateBox').val(""))
+         } else if (itemRowNode == undefined) {   return;}
+         estDetailGridOptions.api.stopEditing();
+         itemRowNode.setDataValue("estimateAmount", $('#estimateAmountBox').val());
+         itemRowNode.setDataValue("unitPriceOfEstimate", $('#unitPriceOfEstimateBox').val());
+         itemRowNode.setDataValue("sumPriceOfEstimate", $('#sumPriceOfEstimateBox').val());
+         let newData = itemRowNode.data; // 바로 위에서 받아온 견적수량,견적단가,합계액의 데이터들이 newData라는 변수명에 담긴다.
+         itemRowNode.setData(newData); // 그러면 itemRowNode에 set해준다.  그 다음 일괄저장으로 출발
+     })
 
  // ================================================================================================================
 //  ======================일괄저장======================================================================

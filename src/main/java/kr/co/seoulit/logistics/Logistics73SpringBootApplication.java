@@ -21,15 +21,15 @@ import kr.co.seoulit.logistics.sys.interceptor.SiteMeshFilter;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-public class Logistics71SpringBootApplication extends SpringBootServletInitializer{
+public class Logistics73SpringBootApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication.run(Logistics71SpringBootApplication.class, args);
+		SpringApplication.run(Logistics73SpringBootApplication.class, args);
 	}
 	@Override
 protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 	
-	return application.sources(Logistics71SpringBootApplication.class);
+	return application.sources(Logistics73SpringBootApplication.class);
 }
 
 	//SiteMeshFilter web.xml 에 적용해주는거랑 같음
